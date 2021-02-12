@@ -1,6 +1,7 @@
 import { Column } from "./column.js";
 import { ColumnWinInspector } from "./column-win-inspector.js";
 import { RowWinInspector } from "./row-win-inspector.js";
+import {DiagonalWinInspector} from "./diagonal-win-inspector.js"
 
 export class Game {
   constructor(playerOneName, playerTwoName, columns = []) {
@@ -12,6 +13,7 @@ export class Game {
     }
     this.columns = columns;
     this.winnerNumber = 0;
+    
   }
   getName() {
     if (this.winnerNumber === 3) {
@@ -28,6 +30,8 @@ export class Game {
     return this.columns[colIndex].tokenTracker[rowIndex];
   }
   playInColumn(index) {
+    console.log(this.winnerNumber);
+   
     this.columns[index].add(this.currentPlayer);
     //console.log(this.columns[index]);
     if (this.currentPlayer === 1) {
@@ -40,6 +44,7 @@ export class Game {
     this.checkForTie();
     this.checkForColumnWin();
     this.checkForRowWin();
+    this.checkDiagonalWin();
   }
 
   isColumnFull(colIndex) {
@@ -66,7 +71,13 @@ export class Game {
         const a = new ColumnWinInspector(this.columns[i]);
         // console.log(a)
         if (a.inspect() === 1 || a.inspect() === 2) {
-          this.winnerNumber = a.inspect();
+          this.winnerNumber = a.inspect()//what determins we have a win...changes winner Number
+          for (let i = 0; i < 7; i++) {
+            let col = document.getElementById(`column-${i}`);
+            col.classList.add("full");
+          }
+       
+           
           return;
         }
       }
@@ -98,5 +109,32 @@ export class Game {
       this.winnerNumber = grp4.inspect();
       return;
     }
+  }
+  checkDiagonalWin() {
+        if (this.winnerNumber !== 0) {
+          return;
+        }
+      
+        const grp1 = new DiagonalWinInspector(this.columns.slice(0, 4));
+        if (grp1.inspect() > 0) {
+          console.log("shouldve won");
+          this.winnerNumber = grp1.inspect();
+          return;
+        }
+        const grp2 = new DiagonalWinInspector(this.columns.slice(1, 5));
+        if (grp2.inspect() > 0) {
+          this.winnerNumber = grp2.inspect();
+          return;
+        }
+        const grp3 = new DiagonalWinInspector(this.columns.slice(2, 6));
+        if (grp3.inspect() > 0) {
+          this.winnerNumber = grp3.inspect();
+          return;
+        }
+        const grp4 = new DiagonalWinInspector(this.columns.slice(3, 7));
+        if (grp4.inspect() > 0) {
+          this.winnerNumber = grp4.inspect();
+          return;
+        }
   }
 }

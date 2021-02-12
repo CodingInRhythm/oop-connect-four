@@ -10,7 +10,7 @@ export class Column {
       }
     }
   }
-  getTokenAt(rowIndex) {
+  getTokenAt(rowIndex) { //particular row of particular column
     return this.tokenTracker[rowIndex];
   }
   isFull() {
