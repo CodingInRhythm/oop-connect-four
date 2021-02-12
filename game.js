@@ -1,8 +1,14 @@
+import { Column } from "./column.js";
 export class Game {
   constructor(playerOneName, playerTwoName) {
     this.playerOneName = playerOneName;
     this.playerTwoName = playerTwoName;
     this.currentPlayer = 1;
+    let columns = [];
+    for (let i = 0; i < 7; i++) {
+      columns.push(new Column());
+    }
+    this.columns = columns;
   }
   getName() {
     return `${this.playerOneName} vs. ${this.playerTwoName}`;
