@@ -1,5 +1,7 @@
 import { Column } from "./column.js";
 import { ColumnWinInspector } from "./column-win-inspector.js";
+import { RowWinInspector } from "./row-win-inspector.js";
+
 export class Game {
   constructor(playerOneName, playerTwoName, columns = []) {
     this.playerOneName = playerOneName;
@@ -22,9 +24,12 @@ export class Game {
       return `${this.playerOneName} vs. ${this.playerTwoName}`;
     }
   }
+  getTokenAt(rowIndex, colIndex) {
+    return this.columns[colIndex].tokenTracker[rowIndex];
+  }
   playInColumn(index) {
-    this.columns[index].add(this.currentPlayer)
-    console.log(this.columns[index])
+    this.columns[index].add(this.currentPlayer);
+    //console.log(this.columns[index]);
     if (this.currentPlayer === 1) {
       this.currentPlayer = 2;
     } else {
@@ -34,6 +39,7 @@ export class Game {
     // console.log(this.columns)
     this.checkForTie();
     this.checkForColumnWin();
+    this.checkForRowWin();
   }
 
   isColumnFull(colIndex) {
@@ -64,6 +70,33 @@ export class Game {
           return;
         }
       }
+    }
+  }
+  checkForRowWin() {
+    if (this.winnerNumber !== 0) {
+      return;
+    }
+    console.log(this.columns.slice(0, 4));
+    const grp1 = new RowWinInspector(this.columns.slice(0, 4));
+    if (grp1.inspect() > 0) {
+      console.log("shouldve won");
+      this.winnerNumber = grp1.inspect();
+      return;
+    }
+    const grp2 = new RowWinInspector(this.columns.slice(1, 5));
+    if (grp2.inspect() > 0) {
+      this.winnerNumber = grp2.inspect();
+      return;
+    }
+    const grp3 = new RowWinInspector(this.columns.slice(2, 6));
+    if (grp3.inspect() > 0) {
+      this.winnerNumber = grp3.inspect();
+      return;
+    }
+    const grp4 = new RowWinInspector(this.columns.slice(3, 7));
+    if (grp4.inspect() > 0) {
+      this.winnerNumber = grp4.inspect();
+      return;
     }
   }
 }

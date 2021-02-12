@@ -27,6 +27,25 @@ const updateUI = () => {
       col.classList.remove("full");
     }
   }
+
+  for (let i = 0; i < 6; i++) {
+    //row loop
+    for (let j = 0; j < 7; j++) {
+      //col index
+      const square = document.getElementById(`square-${i}-${j}`);
+      square.innerHTML = "";
+      if (game.getTokenAt(i, j) === 1) {
+        let div = document.createElement("div");
+        div.classList.add("token", "black");
+        square.appendChild(div);
+      } else if (game.getTokenAt(i, j) === 2) {
+        let div = document.createElement("div");
+        div.classList.add("token", "red");
+        square.appendChild(div);
+      } else {
+      }
+    }
+  }
 };
 window.addEventListener("DOMContentLoaded", (event) => {
   const player1Input = document.getElementById("player-1-name");
@@ -58,8 +77,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
   //row above board where you click
   clickTarget.addEventListener("click", (event) => {
     let id = event.target.id;
-    let split = id.split("-")
-    let index = split[1]
+    let split = id.split("-");
+    let index = split[1];
     game.playInColumn(index); //switches players
     updateUI(); // refreshes board
   });

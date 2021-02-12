@@ -3,7 +3,7 @@ export class Column {
     this.tokenTracker = tokenTracker;
   }
   add(playerNumber) {
-    for (let i = this.tokenTracker.length - 1; i >= 0; i++) {
+    for (let i = this.tokenTracker.length - 1; i >= 0; i--) {
       if (this.tokenTracker[i] === "") {
         this.tokenTracker[i] = playerNumber;
         return;
@@ -17,6 +17,6 @@ export class Column {
     if (!this.tokenTracker.includes("")) {
       return true;
     }
-    return false
+    return false;
   }
 }
