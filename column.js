@@ -18,6 +18,4 @@ export class Column {
       return true;
     }
   }
-  isColumnFull(colIndex) {}
 }
-//test

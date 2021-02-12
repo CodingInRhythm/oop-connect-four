@@ -18,6 +18,15 @@ const updateUI = () => {
     clickTarget.classList.add("red");
     clickTarget.classList.remove("black");
   }
+
+  for (let i = 0; i < 7; i++) {
+    let col = document.getElementById(`column-${i}`);
+    if (game.isColumnFull(i)) {
+      col.classList.add("full");
+    } else {
+      col.classList.remove("full");
+    }
+  }
 };
 window.addEventListener("DOMContentLoaded", (event) => {
   const player1Input = document.getElementById("player-1-name");
