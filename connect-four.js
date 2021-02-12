@@ -57,7 +57,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   //row above board where you click
   clickTarget.addEventListener("click", (event) => {
-    game.playInColumn(); //switches players
+    let id = event.target.id;
+    let split = id.split("-")
+    let index = split[1]
+    game.playInColumn(index); //switches players
     updateUI(); // refreshes board
   });
 });

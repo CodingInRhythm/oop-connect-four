@@ -1,5 +1,5 @@
 export class Column {
-  constructor(tokenTracker = ["1", "1", "1", "1", "2", ""]) {
+  constructor(tokenTracker = ["", "", "", "", "", ""]) {
     this.tokenTracker = tokenTracker;
   }
   add(playerNumber) {
@@ -17,5 +17,6 @@ export class Column {
     if (!this.tokenTracker.includes("")) {
       return true;
     }
+    return false
   }
 }

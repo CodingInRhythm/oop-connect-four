@@ -22,12 +22,16 @@ export class Game {
       return `${this.playerOneName} vs. ${this.playerTwoName}`;
     }
   }
-  playInColumn() {
+  playInColumn(index) {
+    this.columns[index].add(this.currentPlayer)
+    console.log(this.columns[index])
     if (this.currentPlayer === 1) {
       this.currentPlayer = 2;
     } else {
       this.currentPlayer = 1;
     }
+
+    // console.log(this.columns)
     this.checkForTie();
     this.checkForColumnWin();
   }
@@ -54,8 +58,9 @@ export class Game {
     } else {
       for (let i = 0; i < this.columns.length; i++) {
         const a = new ColumnWinInspector(this.columns[i]);
-        if (a === 1 || a === 2) {
-          this.winnerNumber = a;
+        // console.log(a)
+        if (a.inspect() === 1 || a.inspect() === 2) {
+          this.winnerNumber = a.inspect();
           return;
         }
       }
