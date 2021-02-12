@@ -1,5 +1,5 @@
 import { Game } from "./game.js";
-console.log(Game);
+//console.log(Game);
 let game;
 const clickTarget = document.getElementById("click-targets");
 

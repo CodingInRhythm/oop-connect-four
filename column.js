@@ -1,5 +1,5 @@
 export class Column {
-  constructor(tokenTracker = ["", "", "", "", "", ""]) {
+  constructor(tokenTracker = ["1", "1", "1", "1", "2", ""]) {
     this.tokenTracker = tokenTracker;
   }
   add(playerNumber) {
