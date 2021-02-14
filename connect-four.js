@@ -77,7 +77,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
     let id = event.target.id;
     let split = id.split("-");
     let index = split[1];
-    game.playInColumn(index); //switches players
+    if (game.winnerNumber === 0) {
+      game.playInColumn(index); //switches players
+    }
     updateUI(); // refreshes board
   });
 });
